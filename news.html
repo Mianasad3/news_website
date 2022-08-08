@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News</title>
 
-    <style>
+    <link rel="stylesheet" href="news.css">
+
+    <!-- <style>
       body {
         text-align: center;
         background-color: powderblue;
@@ -19,19 +21,22 @@
       p {
         color: red;
       }
-    </style>
+    </style> -->
 </head>
 
 <body>
     <h1>WELCOME</h1>
     <p>Today's date is <span id="date-span"></span></p>
+
+    <script src="news.js"></script>
+    
+    <!-- <script>
+      const currentDate = new Date().toString();
+    
+      const dateSpan = document.getElementById("date-span");
+    
+      dateSpan.innerText = currentDate;
+    </script> -->
 </body>
 
-<script>
-  const currentDate = new Date().toString();
-
-  const dateSpan = document.getElementById("date-span");
-
-  dateSpan.innerText = currentDate;
-</script>
 </html>
