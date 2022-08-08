@@ -4,7 +4,7 @@ const fileSystemModule = require("fs");
 const requestListener = (req, res) => {
     if (req.url === "/news")
     {
-        const handleFileRead = (err, contents) => {
+        const handleHTMLFileRead = (err, contents) => {
             if (err)
             {
                 res.statusCode = 400;
@@ -24,7 +24,55 @@ const requestListener = (req, res) => {
             }
         }
 
-        fileSystemModule.readFile("./news.html", handleFileRead);
+        fileSystemModule.readFile("./news.html", handleHTMLFileRead);
+    }
+    else if (req.url === "/news.js")
+    {
+        const handleJSFileRead = (err, contents) => {
+
+            if (err)
+            {
+                res.statusCode = 400;
+                res.end();
+            }
+
+            if (contents)
+            {
+                res.statusCode = 200;
+
+                res.setHeader('Content-Type', 'application/javascript');
+
+                res.write(contents);
+
+                res.end();
+            }
+        }
+
+        fileSystemModule.readFile("./news.js", handleJSFileRead);
+    }
+    else if (req.url === "/news.css")
+    {
+        const handleCSSFileRead = (err, contents) =>{
+            if (err)
+            {
+                res.statusCode = 400;
+
+                res.end();
+            }
+
+            if (contents)
+            {
+                res.statusCode = 200;
+
+                res.setHeader('Content-Type', 'text/css');
+
+                res.write(contents);
+
+                res.end();
+            }
+        }
+
+        fileSystemModule.readFile("./news.css", handleCSSFileRead);
     }
 }
 
