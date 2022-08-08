@@ -19,12 +19,19 @@
       p {
         color: red;
       }
-  </style>
+    </style>
 </head>
 
 <body>
     <h1>WELCOME</h1>
-
-    <p>Today's date is 2022-08-08.</p>
+    <p>Today's date is <span id="date-span"></span></p>
 </body>
+
+<script>
+  const currentDate = new Date().toString();
+
+  const dateSpan = document.getElementById("date-span");
+
+  dateSpan.innerText = currentDate;
+</script>
 </html>
