@@ -74,7 +74,32 @@ const requestListener = (req, res) => {
 
         fileSystemModule.readFile("./news.css", handleCSSFileRead);
     }
+    else
+    {
+        const handleHTMLFileRead = (err, contents) => {
+            if (err)
+            {
+                res.statusCode = 400;
+
+                res.end();
+            }
+
+            if (contents)
+            {
+                res.statusCode = 404;
+
+                res.setHeader('Content-Type', 'not_found.html');
+
+                res.write(contents);
+
+                res.end();
+            }
+        }
+       
+        fileSystemModule.readFile("./not_found.html", handleHTMLFileRead );
+    }
 }
+
 
 const server = httpModule.createServer(requestListener);
 
