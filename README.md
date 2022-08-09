@@ -1,1 +1,0 @@
-# A news website to master web development.
