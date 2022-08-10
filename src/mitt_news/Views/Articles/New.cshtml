@@ -1,0 +1,17 @@
+﻿<div>
+    <h1 class="text-center">New Article</h1>
+
+    <form asp-controller="articles"  asp-action="new" method="post">
+        <div>
+            <label for="title">Title:</label><br>
+            <input type="text" name="title"><br>
+        </div>
+
+        <div>
+            <label for="author">Author:</label><br>
+            <input type="text" name="author">
+        </div>
+
+        <button>Submit</button>
+    </form>
+</div>
