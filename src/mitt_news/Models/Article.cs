@@ -1,7 +1,7 @@
 ﻿using System;
 namespace mitt_news.Models
 {
-    public enum Categories
+    public enum Categoriess
     {
         Campus,
         Inrnational,

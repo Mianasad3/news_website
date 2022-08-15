@@ -1,0 +1,41 @@
+﻿<div>
+    <h1 class="text-center">New Advertisement</h1>
+
+    <form asp-controller="advertisements" asp-action="newad" method="post">
+        <div>
+            <label for="title">Title:</label><br>
+            <input type="text" name="title"><br>
+        </div>
+
+        <div>
+            <label for="company">Company</label><br>
+            <input type="text" name="company">
+        </div>
+
+        <div>
+            <label for="frequencyPerHour">Frequency Per Hour</label><br>
+            <input type="text" name="frequencyPerHour">
+        </div>
+
+        <div>
+            <label for="discription">Descritption</label><br>
+            <input type="text" name="description">
+        </div>
+
+        <div>
+            <label for="category">Category</label><br>
+            <input type="text" name="category">
+        </div>
+
+        <div>
+            <label for="contactName">Contact Name</label><br>
+            <input type="text" name="contactName">
+        </div>
+
+        <div>
+            <label for="contactNumber">Contact Number</label><br>
+            <input type="number" name="contactNumber">
+        </div>
+        <button>Submit</button>
+    </form>
+</div>

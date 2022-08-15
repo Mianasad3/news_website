@@ -1,15 +1,20 @@
 ﻿<div>
     <h1 class="text-center">New Article</h1>
 
-    <form asp-controller="articles"  asp-action="new" method="post">
+    <form asp-controller="articles" asp-action="new" method="post">
         <div>
-            <label for="title">Title:</label><br>
+            <label for="title">Title (required):</label><br>
             <input type="text" name="title"><br>
         </div>
 
         <div>
-            <label for="author">Author:</label><br>
+            <label for="author">Author (required):</label><br>
             <input type="text" name="author">
+        </div>
+
+        <div>
+            <label for="content">Content:</label><br>
+            <input type="text" name="content">
         </div>
 
         <button>Submit</button>

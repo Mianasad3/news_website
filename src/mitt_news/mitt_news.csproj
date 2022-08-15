@@ -15,5 +15,9 @@
     <Folder Include="Views\Articles\" />
     <Folder Include="Models\ViewModels\" />
     <Folder Include="Models\InputModels\" />
+    <Folder Include="Models\ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Advertisement\AdvertisementCreated.cshtml" />
   </ItemGroup>
 </Project>
