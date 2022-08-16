@@ -9,7 +9,7 @@ namespace mitt_news.Models.InputModels
 
         public string Description { get; set; }
 
-        public int Category { get; set; }
+        public string Category { get; set; }
 
         public string ContactName { get; set; }
 

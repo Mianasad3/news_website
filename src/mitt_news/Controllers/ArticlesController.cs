@@ -2,43 +2,67 @@
 using Microsoft.AspNetCore.Mvc;
 using mitt_news.Models.InputModels;
 using mitt_news.Models;
+using mitt_news.Models.ViewModels;
 
 namespace mitt_news.Controllers
 {
     public class ArticlesController : Controller
     {
-        [HttpGet]
+        private ApplicationDbContext DbContext { get; set; }
 
+        public ArticlesController(ApplicationDbContext dbContext)
+        {
+            DbContext = dbContext;
+        }
+
+        [HttpGet]
         public IActionResult New()
         {
             return View();
         }
 
         [HttpPost]
-
-        
-       
-
-
-        public IActionResult New(NewArticleInputModel userData)
+        public async Task<IActionResult> New(NewArticleInputModel inputModel)
         {
-                Article articleFromUserData = new Article(userData.Author, userData.Title);
+            Article article = new Article(
+                inputModel.Author,
+                inputModel.Title,
+                inputModel.Content,
+                inputModel.Category
+            );
 
-                if(userData.Content != null)
+            if(inputModel.Content != null)
             {
-                articleFromUserData.Content = userData.Content;
+                article.Content = inputModel.Content;
             }
 
-                
+            // save article to database
+            DbContext.Articles.Add(article);
 
+            await DbContext.SaveChangesAsync();
 
-                // save article to database
-
-                return View("ArticleCreated", articleFromUserData);   
-            
+            return Redirect($"/articles/details/{article.Id}");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            Article article = await DbContext.Articles.FindAsync(id);
 
+            if (article != null)
+            {
+                ArticleDetailsViewModel viewModel = new ArticleDetailsViewModel()
+                {
+                    Title = article.Title,
+                    Author = article.Author,
+                    Content = article.Content
+                };
+
+                return View(viewModel);
+            }
+
+            return Redirect("/home");
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace mitt_news.Models
 {
-    public enum Categories
+    public enum AdvertisementCategories
     {
         Educational,
         Sports,
@@ -21,37 +21,36 @@ namespace mitt_news.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
-        public Advertisement(string advertTitle,
+        public Advertisement(
+            string title,
             string company,
             string contactName,
-            int category,
+            string category,
             int contactNumber,
-            string discription,
-            int freqPerHour
-            )
-        {
+            string description,
+            int frequencyPerHour
+        ) {
             Id = Guid.NewGuid().ToString();
-            Title = advertTitle;
+            Title = title;
             Company = company;
             ContactName = contactName;
             CreatedAt = DateTime.Now;
             ContactNumber = contactNumber;
-            Description = discription;
-            FrequencyPerHour = freqPerHour;
+            Description = description;
+            FrequencyPerHour = frequencyPerHour;
 
-            if (category == 0)
+            if (category == "0")
             {
-                Category = Categories.Apparel.ToString();
+                Category = AdvertisementCategories.Apparel.ToString();
             }
-            else if (category == 1)
+            else if (category == "1")
             {
-                Category = Categories.Sports.ToString();
+                Category = AdvertisementCategories.Sports.ToString();
             }
-            else if (category == 2)
+            else if (category == "2")
             {
-                Category = Categories.Educational.ToString();
+                Category = AdvertisementCategories.Educational.ToString();
             }
-
         }
     }
 
