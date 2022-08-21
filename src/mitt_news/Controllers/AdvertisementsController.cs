@@ -8,6 +8,12 @@ namespace mitt_news.Controllers
 {
     public class AdvertisementsController : Controller
     {
+        private ApplicationDbContext DbContext { get; set; }
+
+        public AdvertisementsController(ApplicationDbContext dbContext)
+        {
+            DbContext = dbContext;
+        }
         [HttpGet]
         public IActionResult NewAd()
         {
@@ -15,7 +21,7 @@ namespace mitt_news.Controllers
         }
 
         [HttpPost]
-        public IActionResult NewAd(NewAdvertisementInputModel inputModel)
+        public async Task<IActionResult> NewAd(NewAdvertisementInputModel inputModel)
         {
 
             Advertisement advert = new Advertisement(
@@ -24,18 +30,34 @@ namespace mitt_news.Controllers
                 inputModel.Description,inputModel.FrequencyPerHour
             );
 
-            AdvertisementViewModel viewModel = new AdvertisementViewModel()
-            {
-                Title = advert.Title,
-                Company = advert.Company,
-                ContactName = advert.ContactName,
-                Description = advert.Description,
-                ContactNumber = advert.ContactNumber,
-                Category = advert.Category,
-                FrequencyPerHour = advert.FrequencyPerHour
-            };
+            // save article to a database
+            DbContext.Advertisements.Add(advert);
 
-            return View("AdvertisementCreated", viewModel);
+            await DbContext.SaveChangesAsync();
+
+            return Redirect($"~/advertisements/details/{advert.Id}");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            Advertisement advert = await DbContext.Advertisements.FindAsync(id);
+
+            if(advert != null)
+            {
+                AdvertisementViewModel viewModel = new AdvertisementViewModel() 
+                {
+                    Title = advert.Title,
+                    Company = advert.Company,
+                    Description = advert.Description,
+                    Category = advert.Category,
+                    ContactName = advert.ContactName,
+                    ContactNumber = advert.ContactNumber,
+                    FrequencyPerHour = advert.FrequencyPerHour
+                };
+                return View(viewModel);
+            }
+            return Redirect("/home");
         }
 
     }
