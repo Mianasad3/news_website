@@ -1,0 +1,13 @@
+1. There should be an area for editors who will post news content.
+
+2. This should be a news website accessible to everyone (signed in or signed out).
+
+    i. Users should be able to see a list of all news (articles) for current day
+    ii. Users should be able to see details of each article
+    iii. Users should be able to comment on the article (authentication required)
+    iv. Users should be able to upvote and downvote the article (authentication required)
+    v. Users should be able to report the article (authentication required)
+
+3. There should be an area for administrators who will be able to manage content.
+
+4. Lastly, there should be an API for news articles to be accessed by other sites.
