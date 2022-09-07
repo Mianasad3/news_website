@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using mitt_news.Models;
 using mitt_news.Models.InputModels;
@@ -6,6 +7,8 @@ using mitt_news.Models.ViewModels;
 
 namespace mitt_news.Controllers
 {
+    [Authorize(Roles = "Editor")]
+    [Authorize(Roles = "Administrator")]
     public class AdvertisementsController : Controller
     {
         private ApplicationDbContext DbContext { get; set; }

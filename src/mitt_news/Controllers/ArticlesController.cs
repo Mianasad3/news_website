@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using mitt_news.Models.InputModels;
 using mitt_news.Models;
 using mitt_news.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace mitt_news.Controllers
 {
+    [Authorize(Roles = "Editor")]
     public class ArticlesController : Controller
     {
         private ApplicationDbContext DbContext { get; set; }
