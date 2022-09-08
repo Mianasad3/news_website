@@ -3,9 +3,9 @@ namespace mitt_news.Models
 {
     public enum Categories
     {
-        Campus,
-        International,
-        Sports
+        campus,
+        international,
+        sports
     }
 
     public class Article
@@ -25,19 +25,7 @@ namespace mitt_news.Models
             Title = title;
             Content = content;
             CreatedAt = DateTime.Now;
-
-            if (category == "0")
-            {
-                Category = Categories.Campus.ToString();
-            }
-            else if (category == "1")
-            {
-                Category = Categories.International.ToString();
-            }
-            else if (category == "2")
-            {
-                Category = Categories.Sports.ToString();
-            }
+            Category = category;
         }
     }
 }

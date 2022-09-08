@@ -4,10 +4,10 @@ using mitt_news.Models.InputModels;
 using mitt_news.Models;
 using mitt_news.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace mitt_news.Controllers
 {
-    [Authorize(Roles = "Editor")]
     public class ArticlesController : Controller
     {
         private ApplicationDbContext DbContext { get; set; }
@@ -18,12 +18,57 @@ namespace mitt_news.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Editor")]
         public IActionResult New()
         {
             return View();
         }
 
+        // Edit Page
+
+        [HttpGet]
+        [Authorize(Roles = "Editor")]
+        public async Task<IActionResult> Edit(string id)
+        {
+            Article article = await DbContext.Articles.FindAsync(id);
+            if (article != null)
+            {
+                EditArticleViewModel editViewModel = new EditArticleViewModel()
+                {
+                    Id = article.Id,
+                    Title = article.Title,
+                    Author = article.Author,
+                    Content = article.Content,
+                    Category = article.Category
+                };
+                return View(editViewModel);
+            }
+            return Redirect("/home");
+
+        }
+
         [HttpPost]
+        [Authorize(Roles = "Editor")]
+        public async Task<IActionResult> Edit(EditArticleInputModel inputModel, string id)
+        {
+            Article article = await DbContext.Articles.FindAsync(id);
+
+            if (article != null)
+            {
+                article.Title = inputModel.Title;
+                article.Author = inputModel.Author;
+                article.Content = inputModel.Content;
+                article.Category = inputModel.Category;
+
+                await DbContext.SaveChangesAsync();
+
+                return Redirect($"/articles/details/{article.Id}");
+            }
+            return Redirect("/home");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> New(NewArticleInputModel inputModel)
         {
             Article article = new Article(
@@ -33,7 +78,7 @@ namespace mitt_news.Controllers
                 inputModel.Category
             );
 
-            if(inputModel.Content != null)
+            if (inputModel.Content != null)
             {
                 article.Content = inputModel.Content;
             }
@@ -55,9 +100,11 @@ namespace mitt_news.Controllers
             {
                 ArticleDetailsViewModel viewModel = new ArticleDetailsViewModel()
                 {
+                    Id = article.Id,
                     Title = article.Title,
                     Author = article.Author,
-                    Content = article.Content
+                    Content = article.Content,
+                    Category = article.Category
                 };
 
                 return View(viewModel);

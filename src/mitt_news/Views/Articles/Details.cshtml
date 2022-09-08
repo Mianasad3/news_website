@@ -6,3 +6,13 @@
 <h6>@Model.Author</h6>
 
 <p>@Model.Content</p>
+
+<p>@Model.Category</p>
+
+@if (User.IsInRole("Editor"))
+{
+	<div>
+		<a asp-controller="articles" asp-action="edit" asp-route-id="@Model.Id">Edit Article</a>
+	</div>
+}
+

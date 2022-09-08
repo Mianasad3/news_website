@@ -1,4 +1,7 @@
-﻿@{
+﻿@using mitt_news.Models.ViewModels;
+@model EditArticleViewModel;
+
+@{
     List<SelectListItem> selectItems = new List<SelectListItem>();
 
     foreach (Categories category in Enum.GetValues(typeof(Categories)))
@@ -6,35 +9,37 @@
         selectItems.Add(new SelectListItem()
             {
                 Value = category.ToString(),
-                Text = category.ToString()
+                Text = category.ToString(),
+                Selected = category.ToString() == Model.Category
             }
         );
     }
 }
 
 <div>
-    <h1 class="text-center">New Article</h1>
+    <h1 class="text-center">Edit Article</h1>
 
-    <form asp-controller="articles" asp-action="new" method="post">
+    <form asp-controller="articles" asp-action="edit" method="post" asp-route-id="@Model.Id">
         <div>
             <label for="title">Title (required):</label><br>
-            <input type="text" name="title"><br>
+            <input type="text" name="title" value="@Model.Title">
         </div>
 
         <div>
             <label for="author">Author (required):</label><br>
-            <input type="text" name="author">
+            <input type="text" name="author" value="@Model.Author">
         </div>
 
         <div>
             <label for="content">Content: (required)</label><br>
-            <input type="text" name="content">
+            <input type="text" name="content" value="@Model.Content">
         </div>
 
         <div>
-            <label for="content">Category: (required)</label><br>
+            <label for="content">Select A Category: (required)</label><br>
             <select name="category" asp-items="@selectItems"></select>
         </div>
+
         <button>Submit</button>
     </form>
 </div>

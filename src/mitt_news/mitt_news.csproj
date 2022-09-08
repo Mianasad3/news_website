@@ -7,18 +7,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Views\Articles\" />
     <None Remove="Models\ViewModels\" />
     <None Remove="Models\InputModels\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\InputModels\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="Views\Advertisement\AdvertisementCreated.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
+    <None Include="Views\Advertisements\AdvertisementCreated.cshtml" />
+    <None Include="Views\Advertisements\Details.cshtml" />
+    <None Include="Views\Advertisements\NewAd.cshtml" />
+    <None Include="Views\Articles\Details.cshtml" />
+    <None Include="Views\Articles\New.cshtml" />
+    <None Include="Views\Home\About.cshtml" />
+    <None Include="Views\Home\Contact.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
