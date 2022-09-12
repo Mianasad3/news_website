@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using mitt_news.Models.ViewModels.Home;
 
 namespace mitt_news.Controllers
 {
@@ -14,12 +15,27 @@ namespace mitt_news.Controllers
 
         public IActionResult About()
         {
-            return View();
+            AboutViewModel viewModel = new AboutViewModel()
+            {
+                Content = "Just some random content",
+                Address = "130 Henlow Bay, Winnipeg, MB"
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Contact()
         {
-            return View();
+            ContactViewModel viewModel = new ContactViewModel()
+            {
+                Content = "Another random content",
+                StreetNumber = "130",
+                StreetName = "Henlow Bay",
+                City = "Winnipeg",
+                Province = "MB"
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

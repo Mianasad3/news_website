@@ -1,2 +1,14 @@
-﻿<h1>Explore More at MITT</h1>
-<h4>300 Henlow bay</h4>
+﻿@model AboutViewModel
+
+@{
+	AddressViewModel partialViewModel = new AddressViewModel()
+	{
+		Address = Model.Address
+	};
+}
+
+<h1>Explore More at MITT</h1>
+
+<p>@Model.Content</p>
+
+<partial name="_Address" model="@partialViewModel" />

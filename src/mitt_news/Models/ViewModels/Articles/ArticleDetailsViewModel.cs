@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace mitt_news.Models.ViewModels
+namespace mitt_news.Models.ViewModels.Articles
 {
     public class ArticleDetailsViewModel
     {

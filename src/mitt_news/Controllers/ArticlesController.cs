@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using mitt_news.Models.InputModels;
 using mitt_news.Models;
-using mitt_news.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using mitt_news.Models.ViewModels.Articles;
 
 namespace mitt_news.Controllers
 {

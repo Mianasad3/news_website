@@ -1,9 +1,20 @@
-﻿<div class="text-center">
+﻿@model ContactViewModel
+
+@{
+    string contactAddress = $"{Model.StreetNumber} {Model.StreetName}, {Model.City}, {Model.Province}";
+
+    AddressViewModel partialViewModel = new AddressViewModel()
+    {
+        Address = contactAddress
+    };
+}
+
+<div class="text-center">
 
     <h2>Please Contact Us At</h2>
     <img src="https://www.univerna.com/uploadspanel/product_v/henlow-campus-800-400.jpeg" alt="MITT Image"><br /><br />
-    <h3>300 Henlow Campus</h3><br />
     
-
-
+    <p>@Model.Content</p>
+    
+    <partial name="_Address" model="@partialViewModel" />
 </div>

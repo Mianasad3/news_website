@@ -13,7 +13,6 @@ namespace mitt_news
 
             RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-
             string roleName1 = "Administrator";
 
             IdentityRole role1 = await RoleManager.FindByNameAsync(roleName1);
@@ -51,6 +50,26 @@ namespace mitt_news
                 else
                 {
                     Console.WriteLine("Fatal!! Failed to create a Role for Editor.");
+                }
+            }
+
+            string roleName3 = "MarketingManager";
+
+            IdentityRole role3 = await RoleManager.FindByNameAsync(roleName3);
+
+            if (role3 == null)
+            {
+                role3 = new IdentityRole(roleName3);
+
+                IdentityResult createRole3 = await RoleManager.CreateAsync(role3);
+
+                if (createRole3.Succeeded)
+                {
+                    Console.WriteLine("MarketingManager Role has been Created.");
+                }
+                else
+                {
+                    Console.WriteLine("Fatal!! Failed to create a Role for MarketingManager.");
                 }
             }
 
@@ -135,6 +154,49 @@ namespace mitt_news
                     Console.WriteLine($"Could not save user {userName2}.");
                 }
             }
+
+            string userName3 = "tyrionlannister@got.com";
+
+            IdentityUser user3 = await UserManager.FindByNameAsync(userName3);
+
+            if (user3 == null)
+            {
+                user3 = new IdentityUser(userName3)
+                {
+                    UserName = userName3,
+                    Email = userName3,
+                    EmailConfirmed = true
+                };
+
+                IdentityResult saveUser3 = await UserManager.CreateAsync(user3, "Pass456$");
+
+                if (saveUser3.Succeeded)
+                {
+                    Console.WriteLine($" User {userName3} saved the Database.");
+
+                    bool isUser3MarketingManager = await UserManager.IsInRoleAsync(user3, roleName3);
+
+                    if (!isUser3MarketingManager)
+                    {
+                        IdentityResult assignUser3AsMarketingManager = await UserManager.AddToRoleAsync(user3, roleName3);
+
+                        if (assignUser3AsMarketingManager.Succeeded)
+                        {
+                            Console.WriteLine($"{userName3} is assigned to role {roleName3}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Could not assign {userName3} to role {roleName3}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Could not save user {userName3}.");
+                }
+            }
         }
     }
 }
+    
+

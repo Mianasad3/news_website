@@ -1,9 +1,9 @@
 ﻿using System;
-namespace mitt_news.Models.ViewModels
+namespace mitt_news.Models.ViewModels.Advertisements
 {
     public class AdvertisementViewModel
     {
-
+        public string Id { get; set; }
         public string Title { get; set; }
 
         public string Company { get; set; }

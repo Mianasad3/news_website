@@ -1,0 +1,29 @@
+﻿@model EditAdvertisementViewModel;
+
+<div>
+    <h1 class="text-center">Edit Advertisement</h1>
+
+    <form asp-controller="advertisements" asp-action="editad" method="post" asp-route-id="@Model.Id">
+        <div>
+            <label for="title">Title (required):</label><br>
+            <input type="text" name="title" value="@Model.Title">
+        </div>
+
+        <div>
+            <label for="company">Company (required):</label><br>
+            <input type="text" name="company" value="@Model.Company">
+        </div>
+
+        <div>
+            <label for="description">Description: (required)</label><br>
+            <input type="text" name="description" value="@Model.Description">
+        </div>
+
+        <div>
+            <label for="contactNumber">Contact number: (required)</label><br>
+            <input type="text" name="contactNumber" value="@Model.ContactNumber">
+        </div>
+
+        <button>Submit</button>
+    </form>
+</div>
