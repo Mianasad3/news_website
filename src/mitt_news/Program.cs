@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using mitt_news;
+using mitt_news.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,7 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(
+builder.Services.AddDefaultIdentity<User>(
                     options => options.SignIn.RequireConfirmedAccount = true
                 )
                 .AddRoles<IdentityRole>()

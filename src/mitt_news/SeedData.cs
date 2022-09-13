@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using mitt_news.Models;
 
 namespace mitt_news
 {
     public class SeedData
     {
-        private static UserManager<IdentityUser> UserManager { get; set; }
+        private static UserManager<User> UserManager { get; set; }
         private static RoleManager<IdentityRole> RoleManager { get; set; }
 
         public static async Task InsertNewData(IServiceProvider? serviceProvider)
         {
-            UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            UserManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
             RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -72,18 +73,20 @@ namespace mitt_news
                     Console.WriteLine("Fatal!! Failed to create a Role for MarketingManager.");
                 }
             }
-
+            
             string userName1 = "johnsnow@got.com";
 
-            IdentityUser user1 = await UserManager.FindByNameAsync(userName1);
+            User user1 = await UserManager.FindByNameAsync(userName1);
 
             if (user1 == null)
             {
-                user1 = new IdentityUser()
+                user1 = new User()
                 {
                     UserName = userName1,
                     Email = userName1,
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    FirstName = "John",
+                    LastName = "Snow",
                 };
 
                 IdentityResult saveUser1 = await UserManager.CreateAsync(user1, "Pass123$");
@@ -116,15 +119,17 @@ namespace mitt_news
 
             string userName2 = "peterbaelish@got.com";
 
-            IdentityUser user2 = await UserManager.FindByNameAsync(userName2);
+            User user2 = await UserManager.FindByNameAsync(userName2);
 
             if (user2 == null)
             {
-                user2 = new IdentityUser(userName2)
+                user2 = new User()
                 {
                     UserName = userName2,
                     Email = userName2,
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    FirstName = "Peter",
+                    LastName = "Baelish",
                 };
 
                 IdentityResult saveUser2 = await UserManager.CreateAsync(user2, "Pass321$");
@@ -157,15 +162,17 @@ namespace mitt_news
 
             string userName3 = "tyrionlannister@got.com";
 
-            IdentityUser user3 = await UserManager.FindByNameAsync(userName3);
+            User user3 = await UserManager.FindByNameAsync(userName3);
 
             if (user3 == null)
             {
-                user3 = new IdentityUser(userName3)
+                user3 = new User()
                 {
                     UserName = userName3,
                     Email = userName3,
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    FirstName = "Tyrion",
+                    LastName = "Lannister",
                 };
 
                 IdentityResult saveUser3 = await UserManager.CreateAsync(user3, "Pass456$");
